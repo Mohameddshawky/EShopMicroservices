@@ -1,4 +1,5 @@
 using Carter;
+using Marten;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCarter();
 builder.Services.AddMediatR(cfg =>
 cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+builder.Services.AddMarten(options =>
+{
+    options.Connection(builder.Configuration.GetConnectionString("MartenDb"));
+
+    
+}).UseLightweightSessions();
 
 var app = builder.Build();
 
