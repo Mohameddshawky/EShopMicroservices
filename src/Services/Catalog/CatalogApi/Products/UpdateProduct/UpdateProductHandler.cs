@@ -6,7 +6,7 @@ using Marten;
 namespace CatalogApi.Products.UpdateProduct
 {
     public record UpdateProductCommand
-        (Guid Id, string Name, List<string> Category, string ImageFile, decimal Price):ICommand<UpdateProductResult>;
+        (Guid Id, string Name, List<string> Category, string Description, string ImageFile, decimal Price):ICommand<UpdateProductResult>;
     public record UpdateProductResult(bool IsSuccess);
     internal class UpdateProductHandler(IDocumentSession session,ILogger<UpdateProductHandler> logger) : 
         ICommandHandler<UpdateProductCommand, UpdateProductResult>
