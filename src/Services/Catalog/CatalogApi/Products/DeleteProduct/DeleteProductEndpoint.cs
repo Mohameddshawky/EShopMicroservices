@@ -23,7 +23,6 @@ namespace CatalogApi.Products.DeleteProduct
             .WithTags("Products")
             .WithSummary("Deletes a product by its ID.");
 
-
         }
     }
 }

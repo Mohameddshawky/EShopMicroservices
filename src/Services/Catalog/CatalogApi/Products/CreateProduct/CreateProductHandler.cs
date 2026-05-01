@@ -1,5 +1,6 @@
 ﻿using BuildingBlocks.CQRS;
 using CatalogApi.Models;
+using FluentValidation;
 using Marten;
 
 
@@ -10,11 +11,25 @@ namespace CatalogApi.Products.CreateProduct
         :ICommand<CreateProductResult>;
 
     public record CreateProductResult(Guid Id);
-    internal  class CreateProductCommandHandler(IDocumentSession session) :
+
+
+    public class CrateProductCommandValidator : AbstractValidator<CreateProductCommand>
+    {
+        public CrateProductCommandValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required.");
+            RuleFor(x => x.Category).NotEmpty().WithMessage("At least one category is required.");
+            RuleFor(x => x.Description).NotEmpty().WithMessage("Description is required.");
+            RuleFor(x => x.ImageFile).NotEmpty().WithMessage("Image file is required.");
+            RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must be greater than zero.");
+        }
+    }
+    internal  class CreateProductCommandHandler(IDocumentSession session,ILogger<CreateProductCommandHandler> logger) :
         ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
+           logger.LogInformation("Handling CreateProductCommand for product: {ProductName}", command.Name);
             var product = new Product
             {
                 Name = command.Name,

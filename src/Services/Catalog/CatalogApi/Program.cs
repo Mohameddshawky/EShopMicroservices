@@ -1,16 +1,21 @@
+using BuildingBlocks.Behaviors;
 using Carter;
+using FluentValidation;
 using Marten;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddCarter();
-builder.Services.AddMediatR(cfg =>
-cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(cfg => {
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    });
 
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);       
 builder.Services.AddMarten(options =>
 {
-    options.Connection(builder.Configuration.GetConnectionString("MartenDb"));
+    options.Connection(builder.Configuration.GetConnectionString("MartenDb")!);
 
     
 }).UseLightweightSessions();
