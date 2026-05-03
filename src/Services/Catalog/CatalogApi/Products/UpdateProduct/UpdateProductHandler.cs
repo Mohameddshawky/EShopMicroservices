@@ -34,7 +34,7 @@ namespace CatalogApi.Products.UpdateProduct
             var product = await session.LoadAsync<Product>(request.Id, cancellationToken);
             if (product == null)
             {
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(request.Id   );
             }
             product.Name = request.Name;
             product.Category = request.Category;

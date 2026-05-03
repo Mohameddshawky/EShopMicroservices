@@ -1,4 +1,5 @@
 using BuildingBlocks.Behaviors;
+using BuildingBlocks.Exceptions.Handler;
 using Carter;
 using FluentValidation;
 using Marten;
@@ -20,11 +21,12 @@ builder.Services.AddMarten(options =>
 
     
 }).UseLightweightSessions();
-
+builder.Services.AddExceptionHandler<CustomExceptionHandler>(); 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.MapCarter();
 
+app.UseExceptionHandler(op => { });
 
 app.Run();
