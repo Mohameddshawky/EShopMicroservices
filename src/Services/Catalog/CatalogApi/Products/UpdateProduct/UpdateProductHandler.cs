@@ -25,12 +25,11 @@ namespace CatalogApi.Products.UpdateProduct
     }
 
 
-    internal class UpdateProductHandler(IDocumentSession session,ILogger<UpdateProductHandler> logger) : 
+    internal class UpdateProductHandler(IDocumentSession session) : 
         ICommandHandler<UpdateProductCommand, UpdateProductResult>
     {
         public async Task<UpdateProductResult> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Handling UpdateProductCommand for product id: {Id}", request.Id);
             var product = await session.LoadAsync<Product>(request.Id, cancellationToken);
             if (product == null)
             {
