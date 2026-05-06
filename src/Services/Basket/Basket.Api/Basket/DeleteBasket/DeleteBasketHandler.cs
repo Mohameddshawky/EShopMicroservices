@@ -1,4 +1,5 @@
-﻿namespace Basket.Api.Basket.DeleteBasket;
+﻿
+namespace Basket.Api.Basket.DeleteBasket;
 
     public record DeleteBasketCommand(string UserName) : ICommand<DeleteBasketResult>;
     public record DeleteBasketResult(bool IsSuccess);
@@ -17,7 +18,7 @@
         public async Task<DeleteBasketResult> Handle(DeleteBasketCommand command, CancellationToken cancellationToken)
         {
             // TODO: delete basket from database and cache       
-            await repository.DeleteBasket(command.UserName, cancellationToken);
+            await repository.DeleteBasketAsync(command.UserName, cancellationToken);
 
             return new DeleteBasketResult(true);
         }
