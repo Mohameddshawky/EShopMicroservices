@@ -12,3 +12,5 @@ global using Marten.Schema;
 global using Basket.Api.Data;
 global using Weasel.Core;
 global using BuildingBlocks.Exceptions.Handler;
+global using Microsoft.Extensions.Caching.Distributed;
+global using System.Text.Json;
