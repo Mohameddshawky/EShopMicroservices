@@ -19,7 +19,7 @@ builder.Services.AddMarten(options =>
     options.Schema.For<ShoppingCart>().Identity(x => x.UserName);
     options.AutoCreateSchemaObjects = AutoCreate.All;
 }).UseLightweightSessions();
-
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 var app = builder.Build();
 
 app.MapCarter();
