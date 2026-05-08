@@ -10,3 +10,5 @@ global using BuildingBlocks.Exceptions;
 global using Basket.Api.Exceptions;
 global using Marten.Schema;
 global using Basket.Api.Data;
+global using Weasel.Core;
+global using BuildingBlocks.Exceptions.Handler;
