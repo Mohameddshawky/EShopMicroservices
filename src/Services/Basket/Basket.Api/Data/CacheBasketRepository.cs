@@ -1,6 +1,6 @@
 ﻿namespace Basket.Api.Data
 {
-    public class CacheBasketRepoitory
+    public class CacheBasketRepository
         (
         IBasketRepository innerRepository
         ,IDistributedCache cache
