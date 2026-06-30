@@ -1,3 +1,4 @@
+using Discount.gRPC;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
@@ -12,6 +13,9 @@ builder.Services.AddMediatR(cfg =>
     cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
 
 });
+
+
+
 builder.Services.AddMarten(options =>
 {
     options.Connection(builder.Configuration.GetConnectionString("Database")!);
@@ -25,6 +29,17 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.Configuration = builder.Configuration.GetConnectionString("Redis")!;
 
 });
+builder.Services.AddGrpcClient<Discount.gRPC.DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+}).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+{
+    // Return `true` to allow certificates that are untrusted/invalid
+    // only for development environments
+    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+});
+
+
 builder.Services.AddExceptionHandler<CustomExceptionHandler>(); 
 
 builder.Services.AddHealthChecks()
