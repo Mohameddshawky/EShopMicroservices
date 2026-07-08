@@ -14,6 +14,9 @@
   </Folder>
   <Folder Name="/Services/Ordering/">
     <Project Path="Services/Ordering/Ordering.Api/Ordering.Api.csproj" Id="1a298cd8-945f-4576-b554-85b02ccc4a41" />
+    <Project Path="Services/Ordering/Ordering.Application/Ordering.Application.csproj" Id="94a3cf64-a9f4-4f74-8833-20a8d2d72926" />
+    <Project Path="Services/Ordering/Ordering.Domain/Ordering.Domain.csproj" Id="02f7f6e5-0de1-4ca7-816e-655b5f8fdc6c" />
+    <Project Path="Services/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj" Id="26984600-40e5-423f-b1ed-7a71b888e343" />
   </Folder>
   <Project Path="docker-compose.dcproj">
     <Build />
