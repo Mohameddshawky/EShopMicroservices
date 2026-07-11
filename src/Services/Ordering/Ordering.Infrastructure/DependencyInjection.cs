@@ -1,10 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Ordering.Infrastructure.Data;
 
 namespace Ordering.Infrastructure
 {
@@ -16,6 +13,9 @@ namespace Ordering.Infrastructure
 
             var connectionString = configuration.GetConnectionString("Database");
             // Add infrastructure services here
+            services.AddDbContext<AppDbContext>(op =>
+            op.UseSqlServer(connectionString));
+            //services.AddScoped<I>
             return services;
         }
     }
