@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Application.Data;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.Data.interceptors;
 
@@ -17,7 +18,7 @@ namespace Ordering.Infrastructure
             // Add infrastructure services here
             services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
             services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
-           // services.AddScoped<IAppDbContext, AppDbContext>();
+            services.AddScoped<IAppDbContext, AppDbContext>();
 
             services.AddDbContext<AppDbContext>((sp, options) =>
             {
