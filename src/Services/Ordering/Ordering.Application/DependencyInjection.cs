@@ -17,10 +17,11 @@ namespace Ordering.Application
         {
 
             services.AddMediatR(cfg =>
-            {
-                cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
-                cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+            { 
                 cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+                cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+               
+                cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
             });
             //services.AddFeatureManagement();
 
