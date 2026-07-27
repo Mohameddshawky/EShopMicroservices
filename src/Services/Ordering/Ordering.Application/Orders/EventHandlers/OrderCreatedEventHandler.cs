@@ -1,5 +1,7 @@
 ﻿
 
+using Ordering.Domain.Abstractions;
+
 namespace Ordering.Application.Orders.EventHandlers
 {
     public class OrderCreatedEventHandler(ILogger<OrderCreatedEventHandler> logger/*,
@@ -9,12 +11,12 @@ namespace Ordering.Application.Orders.EventHandlers
     {
         public async Task Handle(OrderCreatedEvent notification, CancellationToken cancellationToken)
         {
-           // logger.LogInformation("Domain Event handled: {DomainEvent}", domainEvent.GetType().Name);
+            logger.LogInformation("Domain Event handled: {DomainEvent}", notification.GetType().Name);
 
             //if (await featureManager.IsEnabledAsync("OrderFullfilment"))
             //{
             //    // create the integration event
-            //    var orderCreatedIntegrationEvent = domainEvent.order.ToOrderDto();
+              var orderCreatedIntegrationEvent = notification.order.ToOrderDto();
             //    // publish it 
             //    await publisher.Publish(orderCreatedIntegrationEvent, cancellationToken);
             //}
