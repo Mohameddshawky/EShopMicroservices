@@ -1,4 +1,5 @@
-﻿using Carter;
+﻿using BuildingBlocks.Exceptions.Handler;
+
 
 namespace Ordering.Api
 {
@@ -7,6 +8,8 @@ namespace Ordering.Api
         public static IServiceCollection AddApiServices(this IServiceCollection services)
         {
             services.AddCarter();
+            services.AddExceptionHandler<CustomExceptionHandler>();
+            services.AddHealthChecks(); 
             return services;
         }
 
@@ -14,6 +17,8 @@ namespace Ordering.Api
         {
 
             webApplication.MapCarter();
+            webApplication.UseExceptionHandler(OP => { });
+            webApplication.MapHealthChecks("/health");
             return webApplication;
         }
     }
