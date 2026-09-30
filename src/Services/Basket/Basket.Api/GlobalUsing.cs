@@ -14,3 +14,6 @@ global using Weasel.Core;
 global using BuildingBlocks.Exceptions.Handler;
 global using Microsoft.Extensions.Caching.Distributed;
 global using System.Text.Json;
+global using Basket.Api.Dtos;
+
+global using MassTransit;
