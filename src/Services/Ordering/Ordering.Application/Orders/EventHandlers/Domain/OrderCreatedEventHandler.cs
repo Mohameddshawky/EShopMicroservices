@@ -1,8 +1,6 @@
-﻿
+﻿using Ordering.Domain.Abstractions;
 
-using Ordering.Domain.Abstractions;
-
-namespace Ordering.Application.Orders.EventHandlers
+namespace Ordering.Application.Orders.EventHandlers.Domain
 {
     public class OrderCreatedEventHandler(ILogger<OrderCreatedEventHandler> logger/*,
                                                 IPublishEndpoint publisher,
