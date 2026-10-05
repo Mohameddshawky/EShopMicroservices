@@ -10,6 +10,10 @@ services:
   orderdb:
     image: mcr.microsoft.com/mssql/server:2022-latest
 
+
+  messagebrocker:
+    image: rabbitmq:management
+ 
   catalogapi:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:

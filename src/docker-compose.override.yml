@@ -34,7 +34,18 @@ services:
     restart: always
     ports:
       - "51433:1433"
- 
+  messagebrocker:
+    container_name: messagebrocker
+    hostname: ecommerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+
   catalogapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -64,10 +75,14 @@ services:
       - ConnectionStrings__Database=Server=basketdb;port=5432;Database=BasketDb;User Id=postgres;Password=123;Include Error Detail=true
       - ConnectionStrings__Redis=distributedcache:6379
       - GrpcSettings__DiscountUrl=https://discount.grpc:8081
+      - MessageBroker__HostAddress=amqp://ecommerce-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
     depends_on:
       - basketdb
       - distributedcache
       - discount.grpc
+      - messagebrocker
     ports:
       - "6001:8080"
       - "6061:8081"

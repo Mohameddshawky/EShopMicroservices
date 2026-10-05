@@ -13,5 +13,5 @@ global using Microsoft.EntityFrameworkCore;
 global using Ordering.Application.Exstentions;
 global
 using BuildingBlocks.Pagination;
-
+global using Microsoft.FeatureManagement;
 global using Ordering.Domain.Events;
