@@ -13,10 +13,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.24.2-preview.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Basket\" />
-    <Folder Include="Models\Catalog\" />
-    <Folder Include="Models\Ordering\" />
-  </ItemGroup>
-
 </Project>
